@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./styles.css">
+    <title>Homepage</title>
+  </head>
+
+  <body>
+    <div class="main">
+    </div>
+    <div class="secondary" id="secondary">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+    <div class="simon">
+      <button class="buttonShape greenButton" id="greenButton"></button>
+      <button class="buttonShape blueButton" id="blueButton"></button>
+      <button class="buttonShape redButton" id="redButton"></button>
+      <button class="buttonShape yellowButton" id="yellowButton"></button>
+    </div>
+
+    <script>
+
+    var greenButton = document.getElementById("greenButton");
+    var blueButton = document.getElementById("blueButton");
+    var redButton = document.getElementById("redButton");
+    var yellowButton = document.getElementById("yellowButton");
+
+    var greenBool = true;
+    greenButton.addEventListener("click", function() {
+      if(greenBool) {
+        greenBool = false;
+        greenButton.classList.remove("greenButton");
+      }
+      else {
+        greenBool = true;
+        greenButton.classList.add("greenButton");
+       }
+    });
+    var blueBool = true;
+    blueButton.addEventListener("click", function() {
+      if(blueBool) {
+        blueBool = false;
+        blueButton.classList.remove("blueButton");
+      }
+      else {
+        blueBool = true;
+        blueButton.classList.add("blueButton");
+       }
+    });
+    var redBool = true;
+    redButton.addEventListener("click", function() {
+      if(redBool) {
+        redBool = false;
+        redButton.classList.remove("redButton");
+      }
+      else {
+        redBool = true;
+        redButton.classList.add("redButton");
+       }
+    });
+    var yellowBool = true;
+    yellowButton.addEventListener("click", function() {
+      if(yellowBool) {
+        yellowBool = false;
+        yellowButton.classList.remove("yellowButton");
+      }
+      else {
+        yellowBool = true;
+        yellowButton.classList.add("yellowButton");
+       }
+    });
+    </script>
+  </body>
+</html>

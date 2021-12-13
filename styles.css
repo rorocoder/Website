@@ -1,0 +1,39 @@
+.main {
+  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1920px-Image_created_with_a_mobile_phone.png");
+  width: 1900px;
+  height: 1300px;
+}
+
+.secondary {
+  background: red;
+  width: 500px;
+  height: 500px;
+}
+
+.simon {
+  width: 100px;
+  height: 500px;
+  border-radius: 100px;
+  padding: 50px;
+}
+
+.buttonShape {
+  width: 300px;
+  height: 100px;
+}
+
+.greenButton {
+  background: green;
+}
+
+.blueButton {
+  background-color: blue;
+}
+
+.redButton {
+  background: red;
+}
+
+.yellowButton {
+  background: yellow;
+}
