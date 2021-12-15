@@ -12,9 +12,14 @@
 
 .simon {
   width: 100px;
-  height: 500px;
   border-radius: 100px;
   padding: 50px;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
 }
 
 .buttonShape {
@@ -36,4 +41,8 @@
 
 .yellowButton {
   background: yellow;
+}
+
+.hidden {
+  background-color: transparent;
 }

@@ -11,12 +11,19 @@
     <div class="secondary" id="secondary">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </div>
-    <div class="simon">
-      <button class="buttonShape greenButton" id="greenButton"></button>
-      <button class="buttonShape blueButton" id="blueButton"></button>
-      <button class="buttonShape redButton" id="redButton"></button>
-      <button class="buttonShape yellowButton" id="yellowButton"></button>
+    <div id="title">
+      Simon Says: Level 1
     </div>
+    <div class="simon" id="grid">
+      <button class="buttonShape" id="greenButton"></button>
+      <button class="buttonShape" id="blueButton"></button>
+      <button class="buttonShape" id="redButton"></button>
+      <button class="buttonShape" id="yellowButton"></button>
+    </div>
+    <div>
+      <button class="buttonShape" id="startButton">Start Game</button>
+    </div>
+
 
     <script>
 
@@ -24,50 +31,165 @@
     var blueButton = document.getElementById("blueButton");
     var redButton = document.getElementById("redButton");
     var yellowButton = document.getElementById("yellowButton");
+    var startButton = document.getElementById("startButton");
+    const colors = new Map();
+    colors.set("red", 1);
+    colors.set("green", 2);
+    colors.set("blue", 3);
+    colors.set("yellow", 4);
+    colors.set(1, "red");
+    colors.set(2, "green");
+    colors.set(3, "blue");
+    colors.set(4, "yellow");
+    const tiles = new Map();
+    tiles.set(1, "redButton");
+    tiles.set(2, "greenButton");
+    tiles.set(3, "blueButton");
+    tiles.set(4, "yellowButton");
+    var order = [];
+    var input = [];
+    var level = 0;
 
-    var greenBool = true;
+    startButton.addEventListener('click', function() {
+      nextRound();
+    });
+
+    function nextRound() {
+      level += 1;
+
+      var nextSequence = [...order];
+      nextSequence.push(nextStep());
+      order = nextSequence;
+      playRound(nextSequence);
+    }
+
+    function nextStep() {
+      const random = Math.floor(Math.random() * 4)+1;
+      return colors.get(random);
+    }
+
+    function activateTile(color) {
+      tile = document.getElementById(tiles.get(colors.get(color)));
+
+      tile.classList.add(tile.id);
+
+      setTimeout(() => {
+        tile.classList.remove(tile.id);
+      }, 300);
+    }
+
+    function playRound(nextSequence) {
+      nextSequence.forEach((color, index) => {
+        setTimeout(() => {
+        activateTile(color);
+      }, (index + 1) * 600);
+    });
+  }
+
     greenButton.addEventListener("click", function() {
-      if(greenBool) {
-        greenBool = false;
+      greenButton.classList.add("greenButton")
+      setTimeout(() => {
         greenButton.classList.remove("greenButton");
+      }, 300);
+
+      input.push("green");
+      if(input.length == order.length)
+      {
+        if(!(JSON.stringify(input) === JSON.stringify(order)))
+        {
+          document.getElementById("title").innerHTML = "You Lose";
+          level = 0;
+          setTimeout(() => {
+            document.getElementById("title").innerHTML = "Simon Says: Level "+(level+1);
+          }, 3000);
+          input = [];
+          order = [];
+          nextSequence = [];
+        }
+        else{
+        document.getElementById("title").innerHTML = "Simon Says: Level "+(level+1);
+        input = [];
+        }
       }
-      else {
-        greenBool = true;
-        greenButton.classList.add("greenButton");
-       }
     });
-    var blueBool = true;
+
     blueButton.addEventListener("click", function() {
-      if(blueBool) {
-        blueBool = false;
+      blueButton.classList.add("blueButton")
+      setTimeout(() => {
         blueButton.classList.remove("blueButton");
+      }, 300);
+
+      input.push("blue");
+      if(input.length == order.length)
+      {
+        if(!(JSON.stringify(input) === JSON.stringify(order)))
+        {
+          document.getElementById("title").innerHTML = "You Lose";
+          level = 0;
+          setTimeout(() => {
+            document.getElementById("title").innerHTML = "Simon Says: Level "+(level+1);
+          }, 3000);
+          input = [];
+          order = [];
+          nextSequence = [];
+        }
+        else{
+        document.getElementById("title").innerHTML = "Simon Says: Level "+(level+1);
+        input = [];
+        }
       }
-      else {
-        blueBool = true;
-        blueButton.classList.add("blueButton");
-       }
     });
-    var redBool = true;
     redButton.addEventListener("click", function() {
-      if(redBool) {
-        redBool = false;
+      redButton.classList.add("redButton")
+      setTimeout(() => {
         redButton.classList.remove("redButton");
+      }, 300);
+
+      input.push("red");
+      if(input.length == order.length)
+      {
+        if(!(JSON.stringify(input) === JSON.stringify(order)))
+        {
+          document.getElementById("title").innerHTML = "You Lose";
+          level = 0;
+          setTimeout(() => {
+            document.getElementById("title").innerHTML = "Simon Says: Level "+(level+1);
+          }, 3000);
+          input = [];
+          order = [];
+          nextSequence = [];
+        }
+        else{
+        document.getElementById("title").innerHTML = "Simon Says: Level "+(level+1);
+        input = [];
+        }
       }
-      else {
-        redBool = true;
-        redButton.classList.add("redButton");
-       }
     });
-    var yellowBool = true;
     yellowButton.addEventListener("click", function() {
-      if(yellowBool) {
-        yellowBool = false;
+      yellowButton.classList.add("yellowButton")
+      setTimeout(() => {
         yellowButton.classList.remove("yellowButton");
+      }, 300);
+
+      input.push("yellow");
+      if(input.length == order.length)
+      {
+        if(!(JSON.stringify(input) === JSON.stringify(order)))
+        {
+          document.getElementById("title").innerHTML = "You Lose";
+          level = 0;
+          setTimeout(() => {
+            document.getElementById("title").innerHTML = "Simon Says: Level "+(level+1);
+          }, 3000);
+          input = [];
+          order = [];
+          nextSequence = [];
+        }
+        else{
+        document.getElementById("title").innerHTML = "Simon Says: Level "+(level+1);
+        input = [];
+        }
       }
-      else {
-        yellowBool = true;
-        yellowButton.classList.add("yellowButton");
-       }
     });
     </script>
   </body>
