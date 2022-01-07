@@ -13,7 +13,8 @@
     </div>
     <div id="title">
       Simon Says: Level 1
-      <h1 class="header"></h1>
+    </div>
+    <div class="header" id="header">
     </div>
     <div class="simon" id="grid">
       <button class="buttonShape" id="greenButton"></button>
@@ -55,24 +56,21 @@
       nextRound();
     });
 
-    if(window.localStorage.highScore == undefined)
-    {
-      ('.header').innerHTML("Highscore: 0");
-    }
-    else if(level > window.localStorage.highScore)
-    {
-      window.localStorage.highScore = level;
-      ('.header').innerHTML("Highscore: "+window.localStorage.highScore);
-    }
-    else {
-      ('.header').innerHTML("Highscore: "+window.localStorage.highScore);
-    }
-
-
-
     function nextRound() {
       level += 1;
-
+      if(window.localStorage.highScore == undefined)
+      {
+        document.getElementById("header").innerHTML = "Highscore: 0";
+        window.localStorage.highScore = level;
+      }
+      else if(level > window.localStorage.highScore)
+      {
+        window.localStorage.highScore = level;
+        document.getElementById("header").innerHTML = "Highscore: "+window.localStorage.highScore;
+      }
+      else {
+        document.getElementById("header").innerHTML = "Highscore: "+window.localStorage.highScore;
+      }
       var nextSequence = [...order];
       nextSequence.push(nextStep());
       order = nextSequence;
