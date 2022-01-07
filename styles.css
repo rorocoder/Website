@@ -4,6 +4,10 @@
   height: 1300px;
 }
 
+.header{
+  font-size: 12px;
+}
+
 .secondary {
   background: red;
   width: 500px;
