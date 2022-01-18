@@ -46,3 +46,7 @@
 .hidden {
   background-color: transparent;
 }
+
+.canvas{
+  background-color: blue;
+}

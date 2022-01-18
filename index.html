@@ -1,33 +1,135 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="./styles.css">
-    <title>Homepage</title>
-  </head>
 
-  <body>
-    <div class="main">
-    </div>
-    <div class="secondary" id="secondary">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </div>
-    <div id="title">
-      Simon Says: Level 1
-    </div>
-    <div id="header">
-    </div>
-    <div class="simon" id="grid">
-      <button class="buttonShape" id="greenButton"></button>
-      <button class="buttonShape" id="blueButton"></button>
-      <button class="buttonShape" id="redButton"></button>
-      <button class="buttonShape" id="yellowButton"></button>
-    </div>
-    <div>
-      <button class="buttonShape" id="startButton">Start Game</button>
-    </div>
+<head>
+  <link rel="stylesheet" href="./styles.css">
+  <title>Homepage</title>
+</head>
+
+<body>
+  <div class="main">
+  </div>
+  <div class="secondary" id="secondary">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </div>
+  <div id="title">
+    Simon Says: Level 1
+  </div>
+  <div id="header">
+  </div>
 
 
-    <script>
+
+
+  <div class="simon" id="grid">
+    <button class="buttonShape" id="greenButton"></button>
+    <button class="buttonShape" id="blueButton"></button>
+    <button class="buttonShape" id="redButton"></button>
+    <button class="buttonShape" id="yellowButton"></button>
+  </div>
+  <div>
+    <button class="buttonShape" id="startButton">Start Game</button>
+  </div>
+
+  <div>
+    <canvas id="canvas" width="900" height="500"></canvas>
+  </div>
+
+
+  <script>
+
+
+    function initializeAnimation() {
+      window.requestAnimationFrame(draw);
+    }
+
+    function drawArt(ctx) {
+      // Draw triangle
+
+      var time = new Date();
+      //ctx.rotate(time.getSeconds() + time.getMilliseconds() / 1000);
+
+      ctx.beginPath();
+      ctx.moveTo(161, 334);
+      ctx.lineTo(402, 394);
+      ctx.moveTo(161, 334);
+      ctx.lineTo(214, 99);
+      ctx.moveTo(161, 334);
+      ctx.lineTo(292, 115);
+      ctx.moveTo(214, 99);
+      ctx.lineTo(292, 115);
+      ctx.lineTo(508, 16);
+      ctx.moveTo(292, 115); //addded this to cover
+      //ctx.lineTo(507, 185);
+      ctx.lineTo(292, 115);
+      ctx.moveTo(507, 185);
+      ctx.lineTo(570, 389);
+      ctx.lineTo(402, 394);
+      ctx.lineTo(507, 185);
+      ctx.moveTo(402, 394);
+      ctx.lineTo(161, 334);
+      ctx.moveTo(402, 394);
+      ctx.lineTo(292, 115);
+      ctx.stroke();
+
+      ctx.save();
+      var time = new Date();
+
+      ctx.translate(507.5, 100.5);
+      ctx.rotate(time.getSeconds() + time.getMilliseconds()/1000);
+      ctx.moveTo(1.5,-84.5);
+      ctx.lineTo(-1.5, 84.5);
+
+      ctx.stroke();
+      ctx.restore();
+
+
+
+
+      ctx.save();
+      var time = new Date();
+
+      //ctx.moveTo(509, 16)
+
+      //ctx.translate(507.5, 100.5);
+      ctx.rotate(time.getSeconds() + time.getMilliseconds()/1000);
+      ctx.arc(1.5,-84.5, 30, 0, 2 * Math.PI);
+      ctx.stroke();
+      // ctx.moveTo(1.5,-84.5);
+      // ctx.lineTo(-1.5, 84.5);
+      //ctx.stroke();
+      ctx.restore();
+
+
+
+    }
+
+    function draw() {
+      var ctx = document.getElementById('canvas').getContext('2d');
+
+      ctx.globalCompositeOperation = 'destination-over';
+      ctx.clearRect(0, 0, 900, 700); // clear canvas
+
+      // Figure out what pen we wanna draw with
+      ctx.fillStyle = 'rgba(0, 153, 255, 1)';
+      ctx.strokeStyle = 'rgba(121, 51, 255, 1)';
+
+      ctx.save();
+
+      drawArt(ctx);
+      ctx.restore();
+
+
+      // Call draw when the website is ready
+      window.requestAnimationFrame(draw);
+    }
+
+    initializeAnimation();
+  </script>
+
+
+  <script>
     window.localStorage.highScore;
     var greenButton = document.getElementById("greenButton");
     var blueButton = document.getElementById("blueButton");
@@ -58,18 +160,14 @@
 
     function nextRound() {
       level += 1;
-      if(window.localStorage.highScore == undefined)
-      {
+      if (window.localStorage.highScore == undefined) {
         document.getElementById("header").innerHTML = "Highscore: 0";
         window.localStorage.highScore = level;
-      }
-      else if(level > window.localStorage.highScore)
-      {
+      } else if (level > window.localStorage.highScore) {
         window.localStorage.highScore = level;
-        document.getElementById("header").innerHTML = "Highscore: "+window.localStorage.highScore;
-      }
-      else {
-        document.getElementById("header").innerHTML = "Highscore: "+window.localStorage.highScore;
+        document.getElementById("header").innerHTML = "Highscore: " + window.localStorage.highScore;
+      } else {
+        document.getElementById("header").innerHTML = "Highscore: " + window.localStorage.highScore;
       }
       var nextSequence = [...order];
       nextSequence.push(nextStep());
@@ -78,7 +176,7 @@
     }
 
     function nextStep() {
-      const random = Math.floor(Math.random() * 4)+1;
+      const random = Math.floor(Math.random() * 4) + 1;
       return colors.get(random);
     }
 
@@ -95,10 +193,10 @@
     function playRound(nextSequence) {
       nextSequence.forEach((color, index) => {
         setTimeout(() => {
-        activateTile(color);
-      }, (index + 1) * 600);
-    });
-  }
+          activateTile(color);
+        }, (index + 1) * 600);
+      });
+    }
 
     greenButton.addEventListener("click", function() {
       greenButton.classList.add("greenButton")
@@ -107,22 +205,19 @@
       }, 300);
 
       input.push("green");
-      if(input.length == order.length)
-      {
-        if(!(JSON.stringify(input) === JSON.stringify(order)))
-        {
+      if (input.length == order.length) {
+        if (!(JSON.stringify(input) === JSON.stringify(order))) {
           document.getElementById("title").innerHTML = "You Lose";
           level = 0;
           setTimeout(() => {
-            document.getElementById("title").innerHTML = "Simon Says: Level "+(level+1);
+            document.getElementById("title").innerHTML = "Simon Says: Level " + (level + 1);
           }, 3000);
           input = [];
           order = [];
           nextSequence = [];
-        }
-        else{
-        document.getElementById("title").innerHTML = "Simon Says: Level "+(level+1);
-        input = [];
+        } else {
+          document.getElementById("title").innerHTML = "Simon Says: Level " + (level + 1);
+          input = [];
         }
       }
     });
@@ -134,22 +229,19 @@
       }, 300);
 
       input.push("blue");
-      if(input.length == order.length)
-      {
-        if(!(JSON.stringify(input) === JSON.stringify(order)))
-        {
+      if (input.length == order.length) {
+        if (!(JSON.stringify(input) === JSON.stringify(order))) {
           document.getElementById("title").innerHTML = "You Lose";
           level = 0;
           setTimeout(() => {
-            document.getElementById("title").innerHTML = "Simon Says: Level "+(level+1);
+            document.getElementById("title").innerHTML = "Simon Says: Level " + (level + 1);
           }, 3000);
           input = [];
           order = [];
           nextSequence = [];
-        }
-        else{
-        document.getElementById("title").innerHTML = "Simon Says: Level "+(level+1);
-        input = [];
+        } else {
+          document.getElementById("title").innerHTML = "Simon Says: Level " + (level + 1);
+          input = [];
         }
       }
     });
@@ -160,22 +252,19 @@
       }, 300);
 
       input.push("red");
-      if(input.length == order.length)
-      {
-        if(!(JSON.stringify(input) === JSON.stringify(order)))
-        {
+      if (input.length == order.length) {
+        if (!(JSON.stringify(input) === JSON.stringify(order))) {
           document.getElementById("title").innerHTML = "You Lose";
           level = 0;
           setTimeout(() => {
-            document.getElementById("title").innerHTML = "Simon Says: Level "+(level+1);
+            document.getElementById("title").innerHTML = "Simon Says: Level " + (level + 1);
           }, 3000);
           input = [];
           order = [];
           nextSequence = [];
-        }
-        else{
-        document.getElementById("title").innerHTML = "Simon Says: Level "+(level+1);
-        input = [];
+        } else {
+          document.getElementById("title").innerHTML = "Simon Says: Level " + (level + 1);
+          input = [];
         }
       }
     });
@@ -186,25 +275,23 @@
       }, 300);
 
       input.push("yellow");
-      if(input.length == order.length)
-      {
-        if(!(JSON.stringify(input) === JSON.stringify(order)))
-        {
+      if (input.length == order.length) {
+        if (!(JSON.stringify(input) === JSON.stringify(order))) {
           document.getElementById("title").innerHTML = "You Lose";
           level = 0;
           setTimeout(() => {
-            document.getElementById("title").innerHTML = "Simon Says: Level "+(level+1);
+            document.getElementById("title").innerHTML = "Simon Says: Level " + (level + 1);
           }, 3000);
           input = [];
           order = [];
           nextSequence = [];
-        }
-        else{
-        document.getElementById("title").innerHTML = "Simon Says: Level "+(level+1);
-        input = [];
+        } else {
+          document.getElementById("title").innerHTML = "Simon Says: Level " + (level + 1);
+          input = [];
         }
       }
     });
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>
